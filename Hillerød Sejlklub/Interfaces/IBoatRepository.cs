@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hillerød_Sejlklub
+namespace Hillerød_Sejlklub.Interfaces
 {
-    public class Booking
+    public interface IBoatRepository
     {
     }
 }

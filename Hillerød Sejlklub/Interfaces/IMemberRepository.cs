@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hillerød_Sejlklub
+namespace Hillerød_Sejlklub.Interfaces
 {
-    internal interface IPerson
+    public interface IMemberRepository
     {
-        string Name { get; set; }
     }
 }
