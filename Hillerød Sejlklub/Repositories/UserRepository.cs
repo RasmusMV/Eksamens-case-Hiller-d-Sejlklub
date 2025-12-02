@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hillerød_Sejlklub.Interfaces
+namespace Hillerød_Sejlklub.Repositories
 {
-    public interface IPerson
+    public class UserRepository
     {
-        string Name { get; set; }
+
     }
 }

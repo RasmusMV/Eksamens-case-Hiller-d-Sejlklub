@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Hillerød_Sejlklub.Interfaces
 {
-    public interface IMemberRepository
+    public interface IUserRepository
     {
+        string Name { get; set; }
     }
 }

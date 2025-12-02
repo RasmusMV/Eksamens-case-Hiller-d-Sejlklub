@@ -7,7 +7,7 @@ using Hillerød_Sejlklub.Interfaces;
 
 namespace Hillerød_Sejlklub
 {
-    public class Member : IPerson
+    public class Member : IUserRepository
     {
         public string Name { get; set; }
     }
