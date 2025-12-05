@@ -8,5 +8,6 @@ namespace Hillerød_Sejlklub.Repositories
 {
     public class BoatRepository
     {
+
     }
 }
