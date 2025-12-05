@@ -43,5 +43,13 @@ namespace Hillerød_Sejlklub
         public Engine Engine { get; set; }
         public string ModelInformation { get; set; }
         public string MaintenanceLog { get; set; }
+
+        public override string ToString()
+        {
+            return $"Name: {Name}, Sailnumber {SailNumber}, Boattype: {BoatType}, Model: {Model}, Built in {BuiltYear}, " +
+                $"Width: {Width}, Height: {Height}, Length: {Length}, Engine: {Engine}";
+        }
+
+
     }
 }

@@ -10,16 +10,19 @@ namespace Hillerød_Sejlklub
 {
     public class Booking
     {
-        #region instance fields
+        #region static fields
         private static int _id;
         #endregion
 
         #region constructor
-        public Booking(Member member, Boat boat, DateTime dateStart, DateTime dateFinish)
+        public Booking(Member member, Boat boat, int startYear, int startMonth, int startDay, int startHour, int startMinute, int endHour, int endMinute)
         {
             Id = MakeId();
             Member = member;
             Boat = boat;
+            //we expect the boat to be returned before the end of everyday so the start year, month and day can be re-used for when they're finished
+            DateTime dateStart = new DateTime(startYear, startMonth, startDay, startHour, startMinute, 0);
+            DateTime dateFinish = new DateTime(startYear, startMonth, startDay, endHour, endMinute, 0);
             try
             {
                 DateValidation(dateStart, dateFinish);
@@ -49,7 +52,7 @@ namespace Hillerød_Sejlklub
         private int MakeId()
         {
             int newId = _id;
-            _id = _id++;
+            _id = _id + 1;
             return newId;
         }
 
@@ -61,10 +64,15 @@ namespace Hillerød_Sejlklub
                 {
                     if (Boat == booking.Value.Boat && dateStart < booking.Value.DateFinish && booking.Value.DateStart < dateFinish)
                     {
-                        throw new BookingDateTakenException("Your chosen time slot is already occupied");
+                        throw new BookingDateTakenException($"Booking ID: {Id}, has a scheduling conflict with Booking ID: {booking.Value.Id}");
                     }
                 }
             }
+        }
+
+        public override string ToString()
+        {
+            return $"Member: {Member.ToString()} \nBoat: {Boat.ToString()} \nBooking: ID: {Id}, Start: {DateStart}, Finish: {DateFinish}";
         }
         #endregion
 

@@ -8,6 +8,6 @@ namespace Hillerød_Sejlklub.Interfaces
 {
     public interface IUserRepository
     {
-        string Name { get; set; }
+        public string Name { get; set; }
     }
 }
