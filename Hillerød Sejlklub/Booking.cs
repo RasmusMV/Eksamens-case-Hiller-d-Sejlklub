@@ -15,24 +15,15 @@ namespace Hillerød_Sejlklub
         #endregion
 
         #region constructor
-        public Booking(Member member, Boat boat, int startYear, int startMonth, int startDay, int startHour, int startMinute, int endHour, int endMinute)
+        public Booking(Member member, Boat boat, string destination ,int startYear, int startMonth, int startDay, int startHour, int startMinute, int endHour, int endMinute)
         {
             Id = MakeId();
             Member = member;
             Boat = boat;
+            Destination = destination;
             //we expect the boat to be returned before the end of everyday so the start year, month and day can be re-used for when they're finished
-            DateTime dateStart = new DateTime(startYear, startMonth, startDay, startHour, startMinute, 0);
-            DateTime dateFinish = new DateTime(startYear, startMonth, startDay, endHour, endMinute, 0);
-            try
-            {
-                DateValidation(dateStart, dateFinish);
-            }
-            catch(BookingDateTakenException b)
-            {
-                Console.WriteLine(b);
-            }
-            DateStart = dateStart;
-            DateFinish = dateFinish;
+            DateStart = new DateTime(startYear, startMonth, startDay, startHour, startMinute, 0);
+            DateFinish = new DateTime(startYear, startMonth, startDay, endHour, endMinute, 0);
         }
         #endregion
 
@@ -40,6 +31,8 @@ namespace Hillerød_Sejlklub
         public Member Member { get; }
 
         public Boat Boat { get; set; }
+
+        public string Destination { get; set; }
 
         public int Id { get; }
 
@@ -49,30 +42,18 @@ namespace Hillerød_Sejlklub
         #endregion
 
         #region methods
+        //Private helper method to automatically assign a id to new bookings
         private int MakeId()
         {
             int newId = _id;
             _id = _id + 1;
             return newId;
         }
-
-        private void DateValidation(DateTime dateStart, DateTime dateFinish)
-        {
-            if(dateStart >= DateTime.Now && dateFinish > dateStart)
-            {
-                foreach (var booking in BookingRepository.GetInstance().BookingList)
-                {
-                    if (Boat == booking.Value.Boat && dateStart < booking.Value.DateFinish && booking.Value.DateStart < dateFinish)
-                    {
-                        throw new BookingDateTakenException($"Booking ID: {Id}, has a scheduling conflict with Booking ID: {booking.Value.Id}");
-                    }
-                }
-            }
-        }
-
+      
+        //Overwritten tostring method combining the information of the member, boat and the bookings own properties to return all information of the booking
         public override string ToString()
         {
-            return $"Member: {Member.ToString()} \nBoat: {Boat.ToString()} \nBooking: ID: {Id}, Start: {DateStart}, Finish: {DateFinish}";
+            return $"Member: {Member.ToString()} \nBoat: {Boat.ToString()} \nBooking: ID: {Id}, Destination: {Destination}, Start: {DateStart}, Finish: {DateFinish}";
         }
         #endregion
 
