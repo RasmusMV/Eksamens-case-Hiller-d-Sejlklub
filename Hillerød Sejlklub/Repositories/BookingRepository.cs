@@ -70,6 +70,23 @@ namespace Hillerød_Sejlklub.Repositories
             _bookings[booking.Id].DateFinish = newFinishDate;
         }
 
+        //Method returning a list of all the currently active bookings 
+        public List<Booking> CurrentlySailing()
+        {
+            List<Booking> currentSailors = new List<Booking>();
+
+            foreach (var booking in _bookings)
+            {
+                if(booking.Value.Active == true)
+                {
+                    currentSailors.Add(booking.Value);
+                }
+            }
+
+            return currentSailors;
+
+        }
+
         //Private helper method to check whether any current bookings in the bookingrepository has the same boat and overlapping booking time
         private void DateValidation(Booking newBooking)
         {
