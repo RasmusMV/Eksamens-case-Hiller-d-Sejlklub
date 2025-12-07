@@ -45,14 +45,16 @@ namespace Hillerød_Sejlklub.Repositories
         {
             try
             {
-                DateValidation(booking);
+                if (DateValidation(booking) == true)
+                {
+                    _bookings.Add(booking.Id, booking);
+                }
             }
             catch(BookingDateTakenException b)
             {
                 Console.WriteLine(b);
             }
 
-            _bookings.Add(booking.Id, booking);
         }
 
         public void DeleteBooking(Booking booking)
@@ -60,14 +62,19 @@ namespace Hillerød_Sejlklub.Repositories
             _bookings.Remove(booking.Id);
         }
 
-        public void UpdateBookingStartDate(Booking booking, DateTime newStartDate)
+        public void UpdateBookingDate(Booking booking, int startYear, int startMonth, int startDay, int startHour, int startMinute, int finishHour, int finishMinute)
         {
-            _bookings[booking.Id].DateStart = newStartDate;
-        }
-
-        public void UpdateBookingFinishDate(Booking booking, DateTime newFinishDate)
-        {
-            _bookings[booking.Id].DateFinish = newFinishDate;
+            DateTime newStartDate = new DateTime(startYear, startMonth, startDay, startHour, startMinute, 0);
+            DateTime newFinishDate = new DateTime(startYear, startMonth, startDay, finishHour, finishMinute, 0);
+            if(newStartDate < newFinishDate)
+            {
+                _bookings[booking.Id].DateStart = newStartDate;
+                _bookings[booking.Id].DateFinish = newFinishDate;
+            }
+            else
+            {
+                throw new BookingUpdateException($"Your new start date is later than you finish. Did you mean to change when you finish?");
+            }
         }
 
         //Method returning a list of all the currently active bookings 
@@ -77,9 +84,13 @@ namespace Hillerød_Sejlklub.Repositories
 
             foreach (var booking in _bookings)
             {
-                if(booking.Value.Active == true)
+                if(booking.Value.Active == true && booking.Value.DateFinish >= DateTime.Now)
                 {
                     currentSailors.Add(booking.Value);
+                }
+                else if(booking.Value.Active == true && booking.Value.DateFinish <= DateTime.Now)
+                {
+                    Console.WriteLine($"{booking.Value.ToString()}is currently missing send a search party\n");
                 }
             }
 
@@ -87,16 +98,20 @@ namespace Hillerød_Sejlklub.Repositories
 
         }
 
+
         //Private helper method to check whether any current bookings in the bookingrepository has the same boat and overlapping booking time
-        private void DateValidation(Booking newBooking)
+        private bool DateValidation(Booking newBooking)
         {
+            bool dateConflict = true;
             foreach (var booking in _bookings.Values)
             {
                 if (booking.Boat == newBooking.Boat && newBooking.DateStart < booking.DateFinish && booking.DateStart < newBooking.DateFinish)
                 {
+                    dateConflict = true;
                     throw new BookingDateTakenException($"Booking ID: {newBooking.Id}, has a scheduling conflict with Booking ID: {booking.Id}");
                 }
             }
+            return dateConflict;
         }
         #endregion
     }

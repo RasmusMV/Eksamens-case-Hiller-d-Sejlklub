@@ -56,14 +56,17 @@ namespace Hillerød_Sejlklub
         //Activates the booking, making the CurrentlySailing method in BookingRepository show that you are currently using the boat
         public void ActivateBooking()
         {
+            Active = true;
+            /* This is what a potential start of the booking could look like
             if (DateStart <= DateTime.Now && DateFinish >= DateTime.Now)
             {
                 Active = true;
             }
+            */
         }
 
         //Deactivates the booking when you are done sailing
-        public void FinishedBooking()
+        public void DeactivateBooking()
         {
             Active = false;
         }
@@ -71,7 +74,8 @@ namespace Hillerød_Sejlklub
         //Overwritten tostring method combining the information of the member, boat and the bookings own properties to return all information of the booking
         public override string ToString()
         {
-            return $"Member: {Member.ToString()} \nBoat: {Boat.ToString()} \nBooking: ID: {Id}, Destination: {Destination}, Start: {DateStart}, Finish: {DateFinish}";
+            return $"Member: {Member.ToString()} \nBoat: {Boat.ToString()} \nBooking: ID: {Id}, " +
+                $"Destination: {Destination}, Start: {DateStart}, Finish: {DateFinish}\n";
         }
         #endregion
 
