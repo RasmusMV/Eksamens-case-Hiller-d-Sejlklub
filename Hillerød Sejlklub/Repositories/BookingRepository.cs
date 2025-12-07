@@ -102,16 +102,14 @@ namespace Hillerød_Sejlklub.Repositories
         //Private helper method to check whether any current bookings in the bookingrepository has the same boat and overlapping booking time
         private bool DateValidation(Booking newBooking)
         {
-            bool dateConflict = true;
             foreach (var booking in _bookings.Values)
             {
                 if (booking.Boat == newBooking.Boat && newBooking.DateStart < booking.DateFinish && booking.DateStart < newBooking.DateFinish)
                 {
-                    dateConflict = true;
                     throw new BookingDateTakenException($"Booking ID: {newBooking.Id}, has a scheduling conflict with Booking ID: {booking.Id}");
                 }
             }
-            return dateConflict;
+            return true;
         }
         #endregion
     }
