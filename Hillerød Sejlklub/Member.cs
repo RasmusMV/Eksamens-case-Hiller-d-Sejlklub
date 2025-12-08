@@ -9,6 +9,10 @@ namespace Hillerød_Sejlklub
 {
     public class Member
     {
+
+        public Member(string name, int age, int id, string mail, int phoneNumber)
+        {
+            Name = name;
         protected string _name;
 
 
@@ -19,6 +23,8 @@ namespace Hillerød_Sejlklub
             ID = id;
             Mail = mail;
             PhoneNumber = phoneNumber;
+        }
+        public string Name { get; set; }
 
         }
         public string Name { get { return _name; } set { _name = value; } }
@@ -26,6 +32,12 @@ namespace Hillerød_Sejlklub
         public int ID { get; set; }
         public string Mail { get; set; }
         public int PhoneNumber { get; set; }
+
+        public override string ToString()
+        {
+            return $"Name: {Name}, age: {Age}, ID: {ID}, Mail: {Mail}, Phonenumber: {PhoneNumber}";
+        }
+
     }
 
 

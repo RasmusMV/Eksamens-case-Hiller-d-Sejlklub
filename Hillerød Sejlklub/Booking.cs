@@ -5,31 +5,26 @@ using System.Text;
 using System.Threading.Tasks;
 using Hillerød_Sejlklub.Repositories;
 using Hillerød_Sejlklub.Exceptions;
+using System.Reflection.Metadata.Ecma335;
 
 namespace Hillerød_Sejlklub
 {
     public class Booking
     {
-        #region instance fields
+        #region static fields
         private static int _id;
         #endregion
 
         #region constructor
-        public Booking(Member member, Boat boat, DateTime dateStart, DateTime dateFinish)
+        public Booking(Member member, Boat boat, string destination ,int startYear, int startMonth, int startDay, int startHour, int startMinute, int endHour, int endMinute)
         {
             Id = MakeId();
             Member = member;
             Boat = boat;
-            try
-            {
-                DateValidation(dateStart, dateFinish);
-            }
-            catch(BookingDateTakenException b)
-            {
-                Console.WriteLine(b);
-            }
-            DateStart = dateStart;
-            DateFinish = dateFinish;
+            Destination = destination;
+            //we expect the boat to be returned before the end of everyday so the start year, month and day can be re-used for when they're finished
+            DateStart = new DateTime(startYear, startMonth, startDay, startHour, startMinute, 0);
+            DateFinish = new DateTime(startYear, startMonth, startDay, endHour, endMinute, 0);
         }
         #endregion
 
@@ -38,33 +33,49 @@ namespace Hillerød_Sejlklub
 
         public Boat Boat { get; set; }
 
+        public string Destination { get; set; }
+
         public int Id { get; }
 
         public DateTime DateStart { get; set; }
 
         public DateTime DateFinish { get; set; }
+
+        public bool Active { get; private set; }
         #endregion
 
         #region methods
+        //Private helper method to automatically assign a id to new bookings
         private int MakeId()
         {
             int newId = _id;
-            _id = _id++;
+            _id = _id + 1;
             return newId;
         }
 
-        private void DateValidation(DateTime dateStart, DateTime dateFinish)
+        //Activates the booking, making the CurrentlySailing method in BookingRepository show that you are currently using the boat
+        public void ActivateBooking()
         {
-            if(dateStart >= DateTime.Now && dateFinish > dateStart)
+            Active = true;
+            /* This is what a potential start of the booking could look like
+            if (DateStart <= DateTime.Now && DateFinish >= DateTime.Now)
             {
-                foreach (var booking in BookingRepository.GetInstance().BookingList)
-                {
-                    if (Boat == booking.Value.Boat && dateStart < booking.Value.DateFinish && booking.Value.DateStart < dateFinish)
-                    {
-                        throw new BookingDateTakenException("Your chosen time slot is already occupied");
-                    }
-                }
+                Active = true;
             }
+            */
+        }
+
+        //Deactivates the booking when you are done sailing
+        public void DeactivateBooking()
+        {
+            Active = false;
+        }
+
+        //Overwritten tostring method combining the information of the member, boat and the bookings own properties to return all information of the booking
+        public override string ToString()
+        {
+            return $"Member: {Member.ToString()} \nBoat: {Boat.ToString()} \nBooking: ID: {Id}, " +
+                $"Destination: {Destination}, Start: {DateStart}, Finish: {DateFinish}\n";
         }
         #endregion
 
