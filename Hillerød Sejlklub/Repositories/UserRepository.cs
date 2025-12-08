@@ -22,6 +22,8 @@ namespace Hillerød_Sejlklub.Repositories
 
         }
 
+        public string Name { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
         public Member Add(Member member)
         {
             _members.Add(member.Name, member);
