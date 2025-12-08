@@ -7,18 +7,21 @@ using Hillerød_Sejlklub.Interfaces;
 
 namespace Hillerød_Sejlklub
 {
-    public class Member : IUserRepository
+    public class Member
     {
+        protected string _name;
+      
 
         public Member(string name, int age, int id, string mail, int phoneNumber)
         {
-            Name = name;
+            _name = name;
             Age = age;
             ID = id;
             Mail = mail;
             PhoneNumber = phoneNumber;
+        
         }
-        public string Name { get; set; }
+        public string Name { get { return _name; } set { _name = value; } }
         public int Age { get; set; }
         public int ID { get; set; }
         public string Mail { get; set; }
@@ -30,4 +33,6 @@ namespace Hillerød_Sejlklub
         }
 
     }
+
+
 }
