@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Hillerød_Sejlklub.Exceptions;
+using Hillerød_Sejlklub.Interfaces;
 
 namespace Hillerød_Sejlklub.Repositories
 {
-    public class BookingRepository
+    public class BookingRepository : IBookingRepository
     {
         #region static fields
         private static BookingRepository _instance = null;
