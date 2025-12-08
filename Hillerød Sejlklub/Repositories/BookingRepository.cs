@@ -66,14 +66,49 @@ namespace Hillerød_Sejlklub.Repositories
         {
             DateTime newStartDate = new DateTime(startYear, startMonth, startDay, startHour, startMinute, 0);
             DateTime newFinishDate = new DateTime(startYear, startMonth, startDay, finishHour, finishMinute, 0);
-            if(newStartDate < newFinishDate)
+
+            DateTime oldStartDate = booking.DateStart;
+            DateTime oldFinishDate = booking.DateFinish;
+
+            try
             {
-                _bookings[booking.Id].DateStart = newStartDate;
-                _bookings[booking.Id].DateFinish = newFinishDate;
+                booking.DateStart = newStartDate;
+                booking.DateFinish = newFinishDate;
+                DateValidation(booking);
             }
-            else
+
+            catch (BookingDateTakenException b)
             {
-                throw new BookingUpdateException($"Your new start date is later than you finish. Did you mean to change when you finish?");
+                booking.DateStart = oldStartDate;
+                booking.DateFinish = oldFinishDate;
+                Console.WriteLine(b);
+            }
+            catch (BookingDateException b)
+            {
+                booking.DateStart = oldStartDate;
+                booking.DateFinish = oldFinishDate;
+                Console.WriteLine(b);
+            }
+        }
+
+        public void UpdateBookingBoat(Booking booking, Boat newBoat)
+        {
+            Boat oldBoat = booking.Boat;
+            try
+            {
+                booking.Boat = newBoat;
+                DateValidation(booking);
+            }
+
+            catch (BookingDateTakenException b)
+            {
+                booking.Boat = oldBoat;
+                Console.WriteLine(b);
+            }
+            catch (BookingDateException b)
+            {
+                booking.Boat = oldBoat;
+                Console.WriteLine(b);
             }
         }
 
@@ -104,9 +139,13 @@ namespace Hillerød_Sejlklub.Repositories
         {
             foreach (var booking in _bookings.Values)
             {
-                if (booking.Boat == newBooking.Boat && newBooking.DateStart < booking.DateFinish && booking.DateStart < newBooking.DateFinish)
+                if (booking.Boat == newBooking.Boat && newBooking.DateStart < booking.DateFinish && booking.DateStart < newBooking.DateFinish && newBooking.Id != booking.Id)
                 {
                     throw new BookingDateTakenException($"Booking ID: {newBooking.Id}, has a scheduling conflict with Booking ID: {booking.Id}");
+                }
+                else if (newBooking.DateStart > newBooking.DateFinish)
+                {
+                    throw new BookingDateException($"Your start date is later than you finish. Did you mean to change when you finish?");
                 }
             }
             return true;

@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Hillerød_Sejlklub.Exceptions
 {
-    public class BookingUpdateException : Exception
+    public class BookingDateException : Exception
     {
-        public BookingUpdateException(string message) : base(message) { }
+        public BookingDateException(string message) : base(message) { }
     }
 }
