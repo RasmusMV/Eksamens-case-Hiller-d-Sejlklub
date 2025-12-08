@@ -22,6 +22,7 @@ namespace Hillerød_Sejlklub.Repositories
 
         }
 
+
         public Member Add(Member member)
         {
             _members.Add(member.Name, member);
