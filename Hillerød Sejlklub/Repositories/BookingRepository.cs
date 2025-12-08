@@ -54,6 +54,10 @@ namespace Hillerød_Sejlklub.Repositories
             {
                 Console.WriteLine(b);
             }
+            catch(BookingDateException b)
+            {
+                Console.WriteLine(b);
+            }
 
         }
 
