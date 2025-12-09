@@ -7,26 +7,23 @@ using Hillerød_Sejlklub.Repositories;
 
 namespace Hillerød_Sejlklub.Interfaces
 {
-    public class IBookingRepository
+    public interface IBookingRepository
     {
-        private static BookingRepository _instance;
+        public Dictionary<int, Booking> BookingList { get; }
 
-        Dictionary<int, Booking> _bookings;
+        public void AddBooking(Booking booking);
 
-        public Dictionary<int, Booking> BookingList;
+        public void DeleteBooking(Booking booking);
 
-        public static BookingRepository GetInstance() { return _instance; }
+        public void UpdateBookingDate(Booking booking, int startYear, int startMonth, int startDay, int startHour, int startMinute, int finishHour, int finishMinute);
 
-        public void AddBooking(Booking booking) { }
+        public void UpdateBookingBoat(Booking booking, Boat newBoat);
 
-        public void DeleteBooking(Booking booking) { _bookings.Remove(booking.Id); }
+        public List<Booking> CurrentlySailing();
 
-        public void UpdateBookingDate(Booking booking, int startYear, int startMonth, int startDay, int startHour, int startMinute, int finishHour, int finishMinute) { }
+        public void BoatBookings();
 
-        public void UpdateBookingBoat(Booking booking, Boat newBoat) { }
+        public void MemberBookings();
 
-        public List<Booking> CurrentlySailing() { return new List<Booking>(); }
-
-        private bool DateValidation(Booking newBooking) { return true; }
     }
 }

@@ -25,6 +25,7 @@ Add the second booking object to the bookingrepository,
 however as this object has an overlapping time interval with booking1 a BookingDateTakenException will fire
 and the object won't be added to the list
 */
+
 bookinger.AddBooking(booking2);
 bookinger.AddBooking(booking3);
 bookinger.AddBooking(booking4);
@@ -85,4 +86,15 @@ bookinger.UpdateBookingDate(booking1, 2025, 12, 20, 10, 0, 14, 30);
 
 bookinger.UpdateBookingBoat(booking1, chopper);
 
+foreach (var keyValuePair in bookinger.BookingList)
+{
+    Console.WriteLine(keyValuePair.Value.ToString());
+}
 
+Console.WriteLine($"How many times each boat has been booked in BookingRepository \n");
+
+bookinger.BoatBookings();
+
+Console.WriteLine($"How many times each member has made a booking in BookingRepository \n");
+
+bookinger.MemberBookings();
