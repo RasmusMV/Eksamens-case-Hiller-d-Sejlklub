@@ -138,6 +138,48 @@ namespace Hillerød_Sejlklub.Repositories
 
         }
 
+        public void BoatBookings()
+        {
+            Dictionary<Boat, int> boats = new Dictionary<Boat, int>();
+            foreach (var booking in _bookings)
+            {
+                if(boats.ContainsKey(booking.Value.Boat) == false)
+                {
+                    boats.Add(booking.Value.Boat, 1);
+                }
+                else
+                {
+                    boats[booking.Value.Boat] = boats[booking.Value.Boat] + 1;
+                }
+            }
+            foreach (var boat in boats)
+            {
+                Console.WriteLine($"Boat: {boat.Key.Name} has been booked {boat.Value} times \n");
+            }
+
+        }
+
+        public void MemberBookings()
+        {
+            Dictionary<Member, int> members = new Dictionary<Member, int>();
+            foreach (var booking in _bookings)
+            {
+                if (members.ContainsKey(booking.Value.Member) == false)
+                {
+                    members.Add(booking.Value.Member, 1);
+                }
+                else
+                {
+                    members[booking.Value.Member] = members[booking.Value.Member] + 1;
+                }
+            }
+            foreach (var member in members)
+            {
+                Console.WriteLine($"Member: {member.Key.Name} has made {member.Value} bookings \n");
+            }
+
+        }
+
 
         //Private helper method to check whether any current bookings in the bookingrepository has the same boat and overlapping booking time
         private bool DateValidation(Booking newBooking)
