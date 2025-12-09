@@ -15,7 +15,7 @@ namespace Hillerød_Sejlklub.Repositories
         #endregion
 
         #region instance fields
-        Dictionary<int, Booking> _bookings;
+        private Dictionary<int, Booking> _bookings;
         #endregion
 
         #region constructor
