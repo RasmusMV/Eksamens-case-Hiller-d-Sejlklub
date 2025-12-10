@@ -11,7 +11,7 @@ namespace Hillerød_Sejlklub.Interfaces
     {
         public Dictionary<int, Booking> BookingList { get; }
 
-        public void AddBooking(Booking booking);
+        public void AddBooking(Member member, Boat boat, string destination, int startYear, int startMonth, int startDay, int startHour, int startMinute, int endHour, int endMinute);
 
         public void DeleteBooking(Booking booking);
 

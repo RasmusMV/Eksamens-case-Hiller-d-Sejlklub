@@ -42,8 +42,9 @@ namespace Hillerød_Sejlklub.Repositories
             return _instance;
         }
 
-        public void AddBooking(Booking booking)
+        public void AddBooking(Member member, Boat boat, string destination, int startYear, int startMonth, int startDay, int startHour, int startMinute, int endHour, int endMinute)
         {
+            Booking booking = new Booking(member, boat, destination, startYear, startMonth, startDay, startHour, startMinute, endHour, endMinute);
             try
             {
                 if (DateValidation(booking) == true)
