@@ -32,8 +32,11 @@ namespace Hillerød_Sejlklub.Repositories
         public bool Delete(string memberName)
         {
             if (_members.Remove(memberName))
+            {
                 return true;
-            else throw new Exception($"{memberName} could not be found");
+            }
+
+            else { throw new Exception($"{memberName} could not be found"); }
         }
 
         public List<Member> GetAll()

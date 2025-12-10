@@ -4,9 +4,9 @@ using Hillerød_Sejlklub.Repositories;
 BookingRepository bookinger = BookingRepository.GetInstance();
 
 //Initialize boats
-Boat skipper = new Boat("Skipper", 5341, "Clipper", "Sagitarius", 1534, 300, 1000, 4000);
-Boat chopper = new Boat("Chopper", 9524, "Tanker", "Venus", 1971, 3000, 2000, 9000);
-
+Boat skipper = new Boat("Skipper", "5341", "Clipper", "Sagitarius", 1534, 300, 1000, 4000);
+Boat chopper = new Boat("Chopper", "9524", "Tanker", "Venus", 1971, 3000, 2000, 9000);
+  
 //Initialize members
 Member mathias = new Member("Mathias", 36, 1, "Mathi@gmail.com", 19875634);
 Member henrik = new Member("Henrik", 56, 2, "Henrik@gmail.com", 65874125);
@@ -98,3 +98,41 @@ bookinger.BoatBookings();
 Console.WriteLine($"How many times each member has made a booking in BookingRepository \n");
 
 bookinger.MemberBookings();
+
+//member
+
+
+MemberRepository memberRepository = new MemberRepository();
+
+List<Member> members = memberRepository.GetAll();
+
+//Tilføj nyt medlem
+
+memberRepository.Add(new Member("Hans", 55, 123, "Hans@gmail.com", 22222222));
+
+//Vis antal medlemmer
+Console.WriteLine("Total members:" + members.Count() + "\n\n");
+
+
+//Liste over alle medlemmer
+foreach (Member member in members)
+{
+    Console.WriteLine($"Name: {member.Name}\nAge:{member.Age}\nID:{member.ID}\nmail:{member.Mail}\nPhone:{member.PhoneNumber}\n\n");
+}
+
+
+//delete member
+try
+{
+    bool del = memberRepository.Delete("Jørgen");
+    if (del == true)
+    {
+        Console.WriteLine("Jørgen has been deleted");
+    }
+}
+
+catch (Exception e)
+{
+    Console.WriteLine(e.Message);
+
+}
