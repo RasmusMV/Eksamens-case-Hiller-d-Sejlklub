@@ -32,11 +32,6 @@ namespace Hillerød_Sejlklub.Repositories
             boat.Name = newName;
         }
 
-        public void WriteMaintenanceLog(Boat boat)
-        {
-            throw new NotImplementedException();
-        }
-
         public Boat GetBoatBy(Boat boat, string key)
         {
             return _boat[key];
