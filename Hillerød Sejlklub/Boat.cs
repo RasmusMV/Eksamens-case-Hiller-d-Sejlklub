@@ -10,7 +10,7 @@ namespace Hillerød_Sejlklub
     public class Boat
     {
 
-        public Boat(string name, int sailNumber, string boatType, string model, int builtYear, double width, double height, double length)
+        public Boat(string name, string sailNumber, string boatType, string model, int builtYear, double width, double height, double length)
         {
             Name = name;
             SailNumber = sailNumber;
@@ -21,7 +21,7 @@ namespace Hillerød_Sejlklub
             Length = length;
         }
 
-        public Boat(string name, int sailNumber, string boatType, string model, int builtYear, double width, double height, double length, Engine engine)
+        public Boat(string name, string sailNumber, string boatType, string model, int builtYear, double width, double height, double length, Engine engine)
         {
             Name = name;
             SailNumber = sailNumber;
@@ -35,7 +35,7 @@ namespace Hillerød_Sejlklub
 
 
         public string Name { get; set; }
-        public int SailNumber { get; set; }
+        public string SailNumber { get; set; }
         public string BoatType { get; set; }
         public string Model { get; set; }
         public int BuiltYear { get; set; }
@@ -43,7 +43,6 @@ namespace Hillerød_Sejlklub
         public double Height { get; set; }
         public double Length { get; set; }
         public Engine Engine { get; set; }
-        public string ModelInformation { get; set; }
         public string MaintenanceLog { get; set; }
 
 
