@@ -9,6 +9,7 @@ namespace Hillerød_Sejlklub
 {
     public class Boat
     {
+
         public Boat(string name, int sailNumber, string boatType, string model, int builtYear, double width, double height, double length)
         {
             Name = name;
@@ -44,6 +45,7 @@ namespace Hillerød_Sejlklub
         public Engine Engine { get; set; }
         public string ModelInformation { get; set; }
         public string MaintenanceLog { get; set; }
+
 
         public override string ToString()
         {
