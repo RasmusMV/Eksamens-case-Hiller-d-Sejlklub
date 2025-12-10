@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -43,8 +44,12 @@ namespace Hillerød_Sejlklub
         public double Height { get; set; }
         public double Length { get; set; }
         public Engine Engine { get; set; }
-        public string MaintenanceLog { get; set; }
+        public List<string> MaintenanceLog { get; set; }
 
+        public void WriteMaintenanceLog()
+        {
+            
+        }
 
         public override string ToString()
         {
