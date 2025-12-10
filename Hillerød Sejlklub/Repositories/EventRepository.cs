@@ -38,5 +38,15 @@ namespace Hillerød_Sejlklub.Repositories
         {
             _events.Remove(evt.Id);
         }
+
+        public void UpdateEventName(Event evt, string newName)
+        {
+            evt.Name = newName;
+        }
+
+        public void UpdateEventDescription(Event evt, string newDescription)
+        {
+            evt.Description = newDescription;
+        }
     }
 }

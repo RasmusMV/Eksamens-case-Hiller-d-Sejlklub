@@ -10,8 +10,6 @@ namespace Hillerød_Sejlklub
     public class Member
     {
         
-      
-
         public Member(string name, int age, int id, string mail, int phoneNumber)
         {
             Name = name;
