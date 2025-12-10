@@ -108,7 +108,7 @@ List<Member> members = memberRepository.GetAll();
 
 //Tilføj nyt medlem
 
-memberRepository.Add(new Member("Hans", 55, 123, "Hans@gmail.com", 22222222));
+members.Add(new Member("Hans", 55, 123, "Hans@gmail.com", 22222222));
 
 //Vis antal medlemmer
 Console.WriteLine("Total members:" + members.Count() + "\n\n");
@@ -124,10 +124,10 @@ foreach (Member member in members)
 //delete member
 try
 {
-    bool del = memberRepository.Delete("Jørgen");
+    bool del = memberRepository.Delete("Buller");
     if (del == true)
     {
-        Console.WriteLine("Jørgen has been deleted");
+        Console.WriteLine("Buller has been deleted");
     }
 }
 
