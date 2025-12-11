@@ -6,14 +6,19 @@ using System.Threading.Tasks;
 
 namespace Hillerød_Sejlklub
 {
-    public class Engine
+    public abstract class Engine
     {
-        public Engine(string type)
+        public Engine(string motorType, int hp, string brand)
         {
-            Type = type;
+            MotorType = motorType;
+            HorsePower = hp;
+            Brand = brand;
         }
 
 
-        public string Type { get; set; }
+        public string MotorType { get; set; }
+        public int HorsePower { get; set; }
+        public string Brand { get; set; }
+
     }
 }

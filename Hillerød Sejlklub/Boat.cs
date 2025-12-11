@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace Hillerød_Sejlklub
 {
-    public class Boat
+    public class Boat : Engine
     {
 
-        public Boat(string name, string sailNumber, string boatType, string model, int builtYear, double width, double height, double length)
+        public Boat(string name, string sailNumber, string boatType, string model, int builtYear, double width, double height, double length, string motorType, int hp, string brand) : base(motorType, hp, brand)
         {
             Name = name;
             SailNumber = sailNumber;
@@ -20,9 +20,10 @@ namespace Hillerød_Sejlklub
             Width = width;
             Height = height;
             Length = length;
+            
         }
 
-        public Boat(string name, string sailNumber, string boatType, string model, int builtYear, double width, double height, double length, Engine engine)
+        public Boat(string name, string sailNumber, string boatType, string model, int builtYear, double width, double height, double length, Engine engine, string motorType, int hp, string brand) : base(motorType, hp, brand)
         {
             Name = name;
             SailNumber = sailNumber;
@@ -50,6 +51,8 @@ namespace Hillerød_Sejlklub
         {
             
         }
+
+        
 
         public override string ToString()
         {
