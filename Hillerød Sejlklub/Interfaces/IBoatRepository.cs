@@ -8,7 +8,9 @@ namespace Hillerød_Sejlklub.Interfaces
 {
     public interface IBoatRepository
     {
-        Boat AddBoat(Boat boat);
-        Boat RemoveBoat(Boat boat);
+        public void AddBoat(Boat boat);
+        public void RemoveBoat(string sailNumber);
+        public void UpdateBoatName(Boat boat, string newName);
+        public Boat GetBoatBy(Boat boat, string key);
     }
 }

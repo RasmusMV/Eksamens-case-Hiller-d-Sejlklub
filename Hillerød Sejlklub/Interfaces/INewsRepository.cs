@@ -1,0 +1,20 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Hillerød_Sejlklub.Interfaces
+{
+    internal interface INewsRepository
+    {
+        public void AddNews(News news);
+
+        public void RemoveNews(int id);
+
+
+
+
+
+    }
+}

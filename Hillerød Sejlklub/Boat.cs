@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Hillerød_Sejlklub
 {
-    public class Boat
+    public class Boat : Engine
     {
 
-        public Boat(string name, int sailNumber, string boatType, string model, int builtYear, double width, double height, double length)
+        public Boat(string name, string sailNumber, string boatType, string model, int builtYear, double width, double height, double length, string motorType, int hp, string brand) : base(motorType, hp, brand)
         {
             Name = name;
             SailNumber = sailNumber;
@@ -19,9 +20,10 @@ namespace Hillerød_Sejlklub
             Width = width;
             Height = height;
             Length = length;
+            
         }
 
-        public Boat(string name, int sailNumber, string boatType, string model, int builtYear, double width, double height, double length, Engine engine)
+        public Boat(string name, string sailNumber, string boatType, string model, int builtYear, double width, double height, double length, Engine engine, string motorType, int hp, string brand) : base(motorType, hp, brand)
         {
             Name = name;
             SailNumber = sailNumber;
@@ -35,7 +37,7 @@ namespace Hillerød_Sejlklub
 
 
         public string Name { get; set; }
-        public int SailNumber { get; set; }
+        public string SailNumber { get; set; }
         public string BoatType { get; set; }
         public string Model { get; set; }
         public int BuiltYear { get; set; }
@@ -43,9 +45,14 @@ namespace Hillerød_Sejlklub
         public double Height { get; set; }
         public double Length { get; set; }
         public Engine Engine { get; set; }
-        public string ModelInformation { get; set; }
-        public string MaintenanceLog { get; set; }
+        public List<string> MaintenanceLog { get; set; }
 
+        public void WriteMaintenanceLog()
+        {
+            
+        }
+
+        
 
         public override string ToString()
         {
