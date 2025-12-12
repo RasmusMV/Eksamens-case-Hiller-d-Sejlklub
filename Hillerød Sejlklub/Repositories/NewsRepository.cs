@@ -18,6 +18,7 @@ namespace Hillerød_Sejlklub.Repositories
         public void AddNews(News news)
         {
             _news.Add(news.Id, news);
+            
         }
         public void RemoveNews(int id)
         {
