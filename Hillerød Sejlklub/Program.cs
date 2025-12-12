@@ -143,6 +143,18 @@ catch (Exception e)
 
 }
 
+//Get by name
+Member member1 = memberRepository.GetByName("Hans");
+if (member1 != null)
+{
+    Console.WriteLine($"{member1.Name}\n{member1.Age}\n{member1.ID}\n{member1.Mail}\n{member1.PhoneNumber}");
+}
+else
+{
+    Console.WriteLine("Member could not be found");
+}
+}
+
 
 Console.WriteLine($"\nEvent testing\n");
 
