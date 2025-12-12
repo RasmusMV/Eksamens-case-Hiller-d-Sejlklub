@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Hillerød_Sejlklub.Repositories
 {
+    /*
     internal class EngineRepository : IEngineRepository
     {
         private Dictionary<string, Engine> _engine;
@@ -31,5 +32,5 @@ namespace Hillerød_Sejlklub.Repositories
         {
             _engine.Remove(engine.Type);
         }
-    }
+    }*/
 }

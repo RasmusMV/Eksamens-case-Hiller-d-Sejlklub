@@ -12,6 +12,10 @@ namespace Hillerød_Sejlklub.Interfaces
 
         public void DeleteEvent(Event evt);
 
+        public void UpdateEventName(Event evt, string newName);
 
+        public void UpdateEventDescription(Event evt, string newDescription);
+
+        public List<Event> GetByName(string name);
     }
 }

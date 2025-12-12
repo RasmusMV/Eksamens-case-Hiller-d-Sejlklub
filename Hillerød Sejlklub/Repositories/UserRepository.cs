@@ -51,9 +51,9 @@ namespace Hillerød_Sejlklub.Repositories
             return null;
         }
 
-        public Member Update(Member member, string key)
+        public Member Update(Member member, string key, string name)
         {
-            _members.Remove(key);
+            _members[key].Name = name;
             var updatedMember = Add(member);
 
             return updatedMember;
