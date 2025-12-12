@@ -17,6 +17,7 @@ namespace Hillerød_Sejlklub
             Name = newsName;
             Id = MakeId();
             Description = newsDescription;
+            CreationDate = DateTime.Now;
         }
         private int MakeId()
         {
@@ -24,7 +25,7 @@ namespace Hillerød_Sejlklub
             _id = _id + 1;
             return newId;
         }
-
+        public DateTime CreationDate { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public int Id { get; set; }

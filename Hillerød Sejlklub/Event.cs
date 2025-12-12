@@ -15,6 +15,7 @@ namespace Hillerød_Sejlklub
             Name = eventName;
             Id = MakeId();
             Description = eventDescription;
+            CreationTime = DateTime.Now;
         }
         
         public string Name { get; set; }
@@ -22,6 +23,7 @@ namespace Hillerød_Sejlklub
         public int Id { get; }
 
         public string Description { get; set; }
+        public DateTime CreationTime { get; set; }
 
         private int MakeId()
         {
