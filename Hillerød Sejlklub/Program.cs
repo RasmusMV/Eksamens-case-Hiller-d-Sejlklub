@@ -140,7 +140,6 @@ try
 catch (Exception e)
 {
     Console.WriteLine(e.Message);
-
 }
 
 //Get by name
@@ -153,7 +152,7 @@ else
 {
     Console.WriteLine("Member could not be found");
 }
-}
+
 
 
 Console.WriteLine($"\nEvent testing\n");
