@@ -25,6 +25,8 @@ namespace Hillerød_Sejlklub
         public string Description { get; set; }
         public DateTime CreationTime { get; set; }
 
+        public DateTime CreationDate { get; set; }
+
         private int MakeId()
         {
             int newId = _id;

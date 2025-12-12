@@ -4,21 +4,21 @@ using Hillerød_Sejlklub.Repositories;
 BookingRepository bookinger = BookingRepository.GetInstance();
 
 //Initialize boats
-Boat skipper = new Boat("Skipper", 5341, "Clipper", "Sagitarius", 1534, 300, 1000, 4000);
-Boat chopper = new Boat("Chopper", 9524, "Tanker", "Venus", 1971, 3000, 2000, 9000);
-
+Boat skipper = new Boat("Skipper", "5341", "Clipper", "Sagitarius", 1534, 300, 1000, 4000);
+Boat chopper = new Boat("Chopper", "9524", "Tanker", "Venus", 1971, 3000, 2000, 9000);
+  
 //Initialize members
 Member mathias = new Member("Mathias", 36, 1, "Mathi@gmail.com", 19875634);
 Member henrik = new Member("Henrik", 56, 2, "Henrik@gmail.com", 65874125);
-
+/*
 //Initialize the first booking objects
 Booking booking1 = new Booking(mathias, skipper, "Hvide sande", 2025, 12, 7, 18, 0, 23, 59);
 Booking booking2 = new Booking(henrik, skipper, "Stillinge strand", 2025, 12, 7, 21, 30, 23, 30);
 Booking booking3 = new Booking(henrik, chopper, "Bjerge", 2025, 12, 7, 5, 0, 10, 30);
 Booking booking4 = new Booking(mathias, chopper, "Hvide sande", 2025, 12, 20, 16, 0, 23, 59);
+*/
 
-
-bookinger.AddBooking(booking1);
+bookinger.AddBooking(mathias, skipper, "Hvide sande", 2025, 12, 7, 18, 0, 23, 59);
 
 /*
 Add the second booking object to the bookingrepository,
@@ -26,9 +26,9 @@ however as this object has an overlapping time interval with booking1 a BookingD
 and the object won't be added to the list
 */
 
-bookinger.AddBooking(booking2);
-bookinger.AddBooking(booking3);
-bookinger.AddBooking(booking4);
+bookinger.AddBooking(henrik, skipper, "Stillinge strand", 2025, 12, 7, 21, 30, 23, 30);
+bookinger.AddBooking(henrik, chopper, "Bjerge", 2025, 12, 7, 5, 0, 10, 30);
+bookinger.AddBooking(mathias, chopper, "Hvide sande", 2025, 12, 20, 16, 0, 23, 59);
 
 Console.WriteLine($"\nWrite out all bookings currently placed in bookingrepository\n");
 
@@ -39,8 +39,8 @@ foreach (var keyValuePair in bookinger.BookingList)
 
 Console.WriteLine($"Activating bookings and looking if any are returning late\n");
 
-booking1.ActivateBooking();
-booking3.ActivateBooking();
+bookinger.BookingList[0].ActivateBooking();
+bookinger.BookingList[2].ActivateBooking();
 
 foreach (var booking in bookinger.CurrentlySailing())
 {
@@ -49,12 +49,12 @@ foreach (var booking in bookinger.CurrentlySailing())
 
 Console.WriteLine($"Deactivating the active bookings \n");
 
-booking1.DeactivateBooking();
-booking3.DeactivateBooking();
+bookinger.BookingList[0].DeactivateBooking();
+bookinger.BookingList[2].DeactivateBooking();
 
 Console.WriteLine($"Deleting booking3 and writing out the remaining bookings \n");
 
-bookinger.DeleteBooking(booking3);
+bookinger.DeleteBooking(bookinger.BookingList[2]);
 
 foreach (var keyValuePair in bookinger.BookingList)
 {
@@ -63,16 +63,16 @@ foreach (var keyValuePair in bookinger.BookingList)
 
 Console.WriteLine($"Updating the date of booking1 \n");
 
-bookinger.UpdateBookingDate(booking1, 2025, 12, 20, 16, 0, 23, 59);
+bookinger.UpdateBookingDate(bookinger.BookingList[0], 2025, 12, 20, 16, 0, 23, 59);
 
 foreach (var keyValuePair in bookinger.BookingList)
 {
     Console.WriteLine(keyValuePair.Value.ToString());
 }
 
-Console.WriteLine($"Updating the boat in booking1 is using however that time slot is already occupied by booking4 \n");
+Console.WriteLine($"Updating the boat in booking1 is using, however that time slot is already occupied by booking4 \n");
 
-bookinger.UpdateBookingBoat(booking1, chopper);
+bookinger.UpdateBookingBoat(bookinger.BookingList[0], chopper);
 
 foreach (var keyValuePair in bookinger.BookingList)
 {
@@ -82,9 +82,9 @@ foreach (var keyValuePair in bookinger.BookingList)
 Console.WriteLine($"Updating the boat in booking1 but this time changing the date to a non-occupied time \n");
 
 
-bookinger.UpdateBookingDate(booking1, 2025, 12, 20, 10, 0, 14, 30);
+bookinger.UpdateBookingDate(bookinger.BookingList[0], 2025, 12, 20, 10, 0, 14, 30);
 
-bookinger.UpdateBookingBoat(booking1, chopper);
+bookinger.UpdateBookingBoat(bookinger.BookingList[0], chopper);
 
 foreach (var keyValuePair in bookinger.BookingList)
 {
@@ -98,3 +98,52 @@ bookinger.BoatBookings();
 Console.WriteLine($"How many times each member has made a booking in BookingRepository \n");
 
 bookinger.MemberBookings();
+
+//member
+
+
+MemberRepository memberRepository = new MemberRepository();
+
+List<Member> members = memberRepository.GetAll();
+
+//Tilføj nyt medlem
+
+members.Add(new Member("Hans", 55, 123, "Hans@gmail.com", 22222222));
+
+//Vis antal medlemmer
+Console.WriteLine("Total members:" + members.Count() + "\n\n");
+
+
+//Liste over alle medlemmer
+foreach (Member member in members)
+{
+    Console.WriteLine($"Name: {member.Name}\nAge:{member.Age}\nID:{member.ID}\nmail:{member.Mail}\nPhone:{member.PhoneNumber}\n\n");
+}
+
+
+//delete member
+try
+{
+    bool del = memberRepository.Delete("Buller");
+    if (del == true)
+    {
+        Console.WriteLine("Buller has been deleted");
+    }
+}
+
+catch (Exception e)
+{
+    Console.WriteLine(e.Message);
+
+}
+
+//Get by name
+Member member1 = memberRepository.GetByName("Hans");
+if (member1 != null)
+{
+    Console.WriteLine($"{member1.Name}\n{member1.Age}\n{member1.ID}\n{member1.Mail}\n{member1.PhoneNumber}");
+}
+else
+{
+    Console.WriteLine("Member could not be found");
+}
