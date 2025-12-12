@@ -4,8 +4,8 @@ using Hillerød_Sejlklub.Repositories;
 BookingRepository bookinger = BookingRepository.GetInstance();
 
 //Initialize boats
-Boat skipper = new Boat("Skipper", "5341", "Clipper", "Sagitarius", 1534, 300, 1000, 4000);
-Boat chopper = new Boat("Chopper", "9524", "Tanker", "Venus", 1971, 3000, 2000, 9000);
+Boat skipper = new Boat("Skipper", "5341", "Clipper", "Sagitarius", 1534, 300, 1000, 4000, "None", 0, "None");
+Boat chopper = new Boat("Chopper", "9524", "Tanker", "Venus", 1971, 3000, 2000, 9000, "Inboard", 50, "Yamaha");
   
 //Initialize members
 Member mathias = new Member("Mathias", 36, 1, "Mathi@gmail.com", 19875634);
@@ -93,11 +93,17 @@ foreach (var keyValuePair in bookinger.BookingList)
 
 Console.WriteLine($"How many times each boat has been booked in BookingRepository \n");
 
-bookinger.BoatBookings();
+foreach (var boat in bookinger.BoatBookings())
+{
+    Console.WriteLine($"Boat: {boat.Key.Name} has been booked {boat.Value} times \n");
+}
 
 Console.WriteLine($"How many times each member has made a booking in BookingRepository \n");
 
-bookinger.MemberBookings();
+foreach (var member in bookinger.MemberBookings())
+{
+    Console.WriteLine($"Member: {member.Key.Name} has made {member.Value} bookings \n");
+}
 
 //member
 
@@ -135,4 +141,29 @@ catch (Exception e)
 {
     Console.WriteLine(e.Message);
 
+}
+
+
+Console.WriteLine($"\nEvent testing\n");
+
+EventRepository events = EventRepository.GetInstance();
+
+events.AddEvent(new Event("Sommer standerhejsning", "Vi hejser stander flaget for at insinuere starten på en ny sæson", new DateTime(2026, 6, 6, 12, 0, 0)));
+events.AddEvent(new Event("Sommer arbejdsdag", "Vi samles i klubben for at gøre bådene klar for sæsonen", new DateTime(2026, 6, 1, 8, 0, 0)));
+events.AddEvent(new Event("Sommerfrokost", "Vi samles for at nyde afslutningen af sommer sæsonen", new DateTime(2026, 9, 30, 11, 30, 0)));
+events.AddEvent(new Event("Efterårsfrokost", "Vi samles for at nyde afslutningen af efterårs sæsonen", new DateTime(2026, 11, 30, 11, 29, 0)));
+events.AddEvent(new Event("Efteråts arbejdsdag", "Vi samles i klubben for at gøre rent, og samle affald inden vinter", new DateTime(2026, 6, 1, 8, 0, 0)));
+
+Console.WriteLine("Write out all events\n");
+
+foreach (var evt in events.EventList)
+{
+    Console.WriteLine(evt.ToString());
+}
+
+Console.WriteLine($"\nNow write out all who has sommer in their name\n");
+
+foreach (var evt in events.GetByName("sommer"))
+{
+    Console.WriteLine(evt.ToString());
 }

@@ -21,9 +21,9 @@ namespace Hillerød_Sejlklub.Interfaces
 
         public List<Booking> CurrentlySailing();
 
-        public void BoatBookings();
+        public Dictionary<Boat, int> BoatBookings();
 
-        public void MemberBookings();
+        public Dictionary<Member, int> MemberBookings();
 
     }
 }
