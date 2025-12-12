@@ -43,10 +43,12 @@ namespace Hillerød_Sejlklub.Repositories
         {
             return _members.Values.ToList();
         }
-
         public Member GetByName(string name)
+
         {
-            return _members[name];
+            if (_members.TryGetValue(name, out var member))
+                return member;
+            return null;
         }
 
         public Member Update(Member member, string key)
