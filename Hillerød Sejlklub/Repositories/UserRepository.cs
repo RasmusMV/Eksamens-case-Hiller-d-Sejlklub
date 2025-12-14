@@ -43,6 +43,7 @@ namespace Hillerød_Sejlklub.Repositories
         {
             return _members.Values.ToList();
         }
+
         public Member GetByName(string name)
 
         {
@@ -51,12 +52,9 @@ namespace Hillerød_Sejlklub.Repositories
             return null;
         }
 
-        public Member Update(Member member, string key)
+        public void UpdateMemberName(string key, string name)
         {
-            _members.Remove(key);
-            var updatedMember = Add(member);
-
-            return updatedMember;
+            _members[key].Name = name;
         }
 
         List<Member> IUserRepository.GetAll()

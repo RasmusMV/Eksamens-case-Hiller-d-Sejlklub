@@ -18,7 +18,10 @@ namespace Hillerød_Sejlklub.Repositories
             _events = new Dictionary<int, Event>();
         }
 
-        public Dictionary<int, Event> EventList { get; }
+        public Dictionary<int, Event> EventList
+        {
+            get { return _events; }
+        }
 
         public static EventRepository GetInstance()
         {
@@ -47,6 +50,22 @@ namespace Hillerød_Sejlklub.Repositories
         public void UpdateEventDescription(Event evt, string newDescription)
         {
             evt.Description = newDescription;
+        }
+
+        public List<Event> GetByName(string name)
+        {
+            List<Event> events = new List<Event>();
+
+            foreach (var evt in _events)
+            {
+                if(evt.Value.Name != null && evt.Value.Name.Contains(name, StringComparison.InvariantCultureIgnoreCase) == true)
+                {
+                    events.Add(evt.Value);
+                }
+            }
+
+            return events;
+
         }
     }
 }

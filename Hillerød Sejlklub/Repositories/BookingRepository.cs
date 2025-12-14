@@ -139,7 +139,7 @@ namespace Hillerød_Sejlklub.Repositories
 
         }
 
-        public void BoatBookings()
+        public Dictionary<Boat, int> BoatBookings()
         {
             Dictionary<Boat, int> boats = new Dictionary<Boat, int>();
             foreach (var booking in _bookings)
@@ -153,14 +153,10 @@ namespace Hillerød_Sejlklub.Repositories
                     boats[booking.Value.Boat] = boats[booking.Value.Boat] + 1;
                 }
             }
-            foreach (var boat in boats)
-            {
-                Console.WriteLine($"Boat: {boat.Key.Name} has been booked {boat.Value} times \n");
-            }
-
+            return boats;
         }
 
-        public void MemberBookings()
+        public Dictionary<Member, int> MemberBookings()
         {
             Dictionary<Member, int> members = new Dictionary<Member, int>();
             foreach (var booking in _bookings)
@@ -174,10 +170,7 @@ namespace Hillerød_Sejlklub.Repositories
                     members[booking.Value.Member] = members[booking.Value.Member] + 1;
                 }
             }
-            foreach (var member in members)
-            {
-                Console.WriteLine($"Member: {member.Key.Name} has made {member.Value} bookings \n");
-            }
+            return members;
 
         }
 
