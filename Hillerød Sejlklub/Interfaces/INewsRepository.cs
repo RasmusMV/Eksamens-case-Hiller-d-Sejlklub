@@ -12,7 +12,7 @@ namespace Hillerød_Sejlklub.Interfaces
 
         public void RemoveNews(int id);
 
-
+        public List<News> GetNewsByName(string name);
 
 
 

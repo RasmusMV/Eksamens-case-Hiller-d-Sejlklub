@@ -1,6 +1,7 @@
 ﻿using Hillerød_Sejlklub;
 using Hillerød_Sejlklub.Exceptions;
 using Hillerød_Sejlklub.Repositories;
+using System.Xml.Linq;
 BookingRepository bookinger = BookingRepository.GetInstance();
 UserRepository members = UserRepository.GetInstance();
 
@@ -180,3 +181,42 @@ foreach (var evt in events.GetByName("sommer"))
 {
     Console.WriteLine(evt.ToString());
 }
+
+
+
+
+
+
+
+
+BoatRepository boatRepository = new BoatRepository();
+
+List<Boat> boats = boatRepository.GetAll();
+
+//Tilføj ny boat
+
+boats.Add(new Boat("Fenja", "ABC123", "SailBoat", "Civilian", 2005, 15, 30, 25, "None", 0, "None"));
+
+
+
+//Vis antal af boats
+Console.WriteLine("Total Boats:" + boats.Count() + "\n\n");
+
+
+//Liste over alle boats
+foreach (Boat boat in boats)
+{
+    Console.WriteLine(boat.ToString());
+}
+
+
+//delete Boat
+
+boatRepository.RemoveBoat("ABC123");
+
+//Get by name
+foreach(Boat boat in boatRepository.GetBoatByName("Fenja"))
+{
+    Console.WriteLine(boat);
+}
+
