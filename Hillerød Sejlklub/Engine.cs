@@ -20,5 +20,6 @@ namespace Hillerød_Sejlklub
         public int HorsePower { get; set; }
         public string Brand { get; set; }
 
+
     }
 }

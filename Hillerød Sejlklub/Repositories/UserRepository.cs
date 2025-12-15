@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace Hillerød_Sejlklub.Repositories
 {
-    public class MemberRepository : IUserRepository
+    public class UserRepository : IUserRepository
     {
         #region Static fields
         private static MemberRepository _instance = null;
         #endregion
         private readonly Dictionary<string, Member> _members;
-   
-        public MemberRepository()
+
+        public UserRepository()
         {
             _members = new Dictionary<string, Member>
         {
