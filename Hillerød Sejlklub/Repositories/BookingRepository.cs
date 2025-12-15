@@ -42,9 +42,9 @@ namespace Hillerød_Sejlklub.Repositories
             return _instance;
         }
 
-        public void AddBooking(Member member, Boat boat, string destination, int startYear, int startMonth, int startDay, int startHour, int startMinute, int endHour, int endMinute)
+        public void AddBooking(Member member, Boat boat, string destination, DateTime start, DateTime finish)
         {
-            Booking booking = new Booking(member, boat, destination, startYear, startMonth, startDay, startHour, startMinute, endHour, endMinute);
+            Booking booking = new Booking(member, boat, destination, start, finish);
             try
             {
                 if (DateValidation(booking) == true)
@@ -68,10 +68,10 @@ namespace Hillerød_Sejlklub.Repositories
             _bookings.Remove(booking.Id);
         }
 
-        public void UpdateBookingDate(Booking booking, int startYear, int startMonth, int startDay, int startHour, int startMinute, int finishHour, int finishMinute)
+        public void UpdateBookingDate(Booking booking, DateTime start, DateTime finish)
         {
-            DateTime newStartDate = new DateTime(startYear, startMonth, startDay, startHour, startMinute, 0);
-            DateTime newFinishDate = new DateTime(startYear, startMonth, startDay, finishHour, finishMinute, 0);
+            DateTime newStartDate = start;
+            DateTime newFinishDate = finish;
 
             DateTime oldStartDate = booking.DateStart;
             DateTime oldFinishDate = booking.DateFinish;

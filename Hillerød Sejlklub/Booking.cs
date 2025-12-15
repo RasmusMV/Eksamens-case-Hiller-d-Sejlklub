@@ -16,15 +16,14 @@ namespace Hillerød_Sejlklub
         #endregion
 
         #region constructor
-        public Booking(Member member, Boat boat, string destination ,int startYear, int startMonth, int startDay, int startHour, int startMinute, int endHour, int endMinute)
+        public Booking(Member member, Boat boat, string destination, DateTime start, DateTime finish)
         {
             Id = MakeId();
             Member = member;
             Boat = boat;
             Destination = destination;
-            //we expect the boat to be returned before the end of everyday so the start year, month and day can be re-used for when they're finished
-            DateStart = new DateTime(startYear, startMonth, startDay, startHour, startMinute, 0);
-            DateFinish = new DateTime(startYear, startMonth, startDay, endHour, endMinute, 0);
+            DateStart = start;
+            DateFinish = finish;
         }
         #endregion
 
