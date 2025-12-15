@@ -9,14 +9,23 @@ namespace Hillerød_Sejlklub.Repositories
 {
     public class BoatRepository : IBoatRepository
     {
+        private static BoatRepository _instance = null;
 
         private Dictionary<string, Boat> _boat;
 
-        private BoatRepository()
+        public BoatRepository()
         {
             _boat = new Dictionary<string, Boat>();
         }
 
+        public static BoatRepository GetInstanceFromBoat()
+        {
+            if (_instance == null)
+            {
+                _instance = new BoatRepository();
+            }
+            return _instance;
+        }
         public void AddBoat(Boat boat)
         {
             _boat.Add(boat.SailNumber, boat);
@@ -32,10 +41,26 @@ namespace Hillerød_Sejlklub.Repositories
             boat.Name = newName;
         }
 
-        public Boat GetBoatBy(Boat boat, string key)
+        public List<Boat> GetAll()
         {
-            return _boat[key];
+            return _boat.Values.ToList();
         }
+        public List<Boat> GetBoatByName(string name)
+        {
+            List<Boat> boats = new List<Boat>();
+
+            foreach (var boat in _boat)
+            {
+                if (boat.Value.Name != null && boat.Value.Name.Contains(name, StringComparison.InvariantCultureIgnoreCase) == true)
+                {
+                    boats.Add(boat.Value);
+                }
+            }
+
+            return boats;
+
+        }
+
 
     }
 }
