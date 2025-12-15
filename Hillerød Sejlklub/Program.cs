@@ -2,14 +2,15 @@
 using Hillerød_Sejlklub.Exceptions;
 using Hillerød_Sejlklub.Repositories;
 BookingRepository bookinger = BookingRepository.GetInstance();
+MemberRepository members = MemberRepository.GetInstance();
 
 //Initialize boats
 Boat skipper = new Boat("Skipper", "5341", "Clipper", "Sagitarius", 1534, 300, 1000, 4000, "None", 0, "None");
 Boat chopper = new Boat("Chopper", "9524", "Tanker", "Venus", 1971, 3000, 2000, 9000, "Inboard", 50, "Yamaha");
   
 //Initialize members
-Member mathias = new Member("Mathias", 36, 1, "Mathi@gmail.com", 19875634);
-Member henrik = new Member("Henrik", 56, 2, "Henrik@gmail.com", 65874125);
+Member mathias = new Member("Mathias", new DateTime(1995,10,3),  "Mathi@gmail.com", 19875634);
+Member henrik = new Member("Henrik", new DateTime(1940,11,24),  "Henrik@gmail.com", 65874125);
 /*
 //Initialize the first booking objects
 Booking booking1 = new Booking(mathias, skipper, "Hvide sande", 2025, 12, 7, 18, 0, 23, 59);
@@ -110,21 +111,22 @@ foreach (var member in bookinger.MemberBookings())
 
 UserRepository memberRepository = new UserRepository();
 
-List<Member> members = memberRepository.GetAll();
+List<Member> membersList = memberRepository.GetAll();
 
 //Tilføj nyt medlem
 
-members.Add(new Member("Hans", 55, 123, "Hans@gmail.com", 22222222));
+membersList.Add(new Member("Hans", new DateTime(1955,6,29), "Hans@gmail.com", 22222222));
 
 //Vis antal medlemmer
-Console.WriteLine("Total members:" + members.Count() + "\n\n");
+Console.WriteLine("Total members:" + membersList.Count() + "\n\n");
 
 
 //Liste over alle medlemmer
-foreach (Member member in members)
+foreach (Member member in membersList)
 {
-    Console.WriteLine($"Name: {member.Name}\nAge:{member.Age}\nID:{member.ID}\nmail:{member.Mail}\nPhone:{member.PhoneNumber}\n\n");
+Console.WriteLine($"Name: {member.Name}\nAge:{member.Age}\nID:{member.ID}\nmail:{member.Mail}\nPhone:{member.PhoneNumber}\n\n");
 }
+
 
 
 //delete member
@@ -146,7 +148,7 @@ catch (Exception e)
 Member member1 = memberRepository.GetByName("Hans");
 if (member1 != null)
 {
-    Console.WriteLine($"{member1.Name}\n{member1.Age}\n{member1.ID}\n{member1.Mail}\n{member1.PhoneNumber}");
+    Console.WriteLine($"{member1.ToString}");
 }
 else
 {

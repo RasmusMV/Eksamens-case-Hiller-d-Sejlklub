@@ -9,19 +9,30 @@ namespace Hillerød_Sejlklub.Repositories
 {
     public class UserRepository : IUserRepository
     {
+        #region Static fields
+        private static MemberRepository _instance = null;
+        #endregion
         private readonly Dictionary<string, Member> _members;
 
         public UserRepository()
         {
             _members = new Dictionary<string, Member>
         {
-                {"Jan", new Member("Jan", 52,  110100, "JanErSej@gmail.com", 20202020) },
-                {"Erik", new Member("Erik", 67,  110101, "ErikErSej@gmail.com", 20202021) },
-                {"Buller", new Member("Buller", 55,  110102, "BullerErSej@gmail.com", 20202022) }
+                {"Jan", new Member("Jan", new DateTime(1952,10,5), "JanErSej@gmail.com", 20202020) },
+                {"Erik", new Member("Erik", new DateTime(1959, 1, 5), "ErikErSej@gmail.com", 20202021) },
+                {"Buller", new Member("Buller", new DateTime (1960,6,5), "BullerErSej@gmail.com", 20202022) }
         };
+      
+        }          
 
+     public static MemberRepository GetInstance()
+        {
+            if (_instance == null)
+            {
+                _instance = new MemberRepository();
+            }
+            return _instance;
         }
-
 
         public Member Add(Member member)
         {
