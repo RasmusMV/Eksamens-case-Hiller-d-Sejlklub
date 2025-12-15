@@ -173,7 +173,7 @@ events.AddEvent(new Event("Efter√•ts arbejdsdag", "Vi samles i klubben for at g√
 
 Console.WriteLine("Write out all events\n");
 
-foreach (var evt in events.EventList)
+foreach (var evt in events.EventDictionary)
 {
     Console.WriteLine(evt.ToString());
 }
