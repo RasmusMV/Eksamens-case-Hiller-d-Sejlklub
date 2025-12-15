@@ -192,22 +192,20 @@ foreach (var evt in events.GetByName("sommer"))
 
 
 
-BoatRepository boatRepository = new BoatRepository();
-
-List<Boat> boats = boatRepository.GetAll();
+BoatRepository boatRepository = BoatRepository.GetInstanceFromBoat();
 
 //Tilføj ny boat
 
-boats.Add(new Boat("Fenja", "ABC123", "SailBoat", "Civilian", 2005, 15, 30, 25, "None", 0, "None"));
+boatRepository.AddBoat(new Boat("Fenja", "ABC123", "SailBoat", "Civilian", 2005, 15, 30, 25, "None", 0, "None"));
 
 
 
 //Vis antal af boats
-Console.WriteLine("Total Boats:" + boats.Count() + "\n\n");
+Console.WriteLine("Total Boats:" + boatRepository.GetAll().Count + "\n\n");
 
 
 //Liste over alle boats
-foreach (Boat boat in boats)
+foreach (var boat in boatRepository.GetAll())
 {
     Console.WriteLine(boat.ToString());
 }
@@ -215,11 +213,11 @@ foreach (Boat boat in boats)
 
 //delete Boat
 
-boatRepository.RemoveBoat("ABC123");
+//boatRepository.RemoveBoat("ABC123");
 
 //Get by name
 foreach(Boat boat in boatRepository.GetBoatByName("Fenja"))
 {
-    Console.WriteLine(boat);
+    Console.WriteLine(boat.ToString());
 }
 
