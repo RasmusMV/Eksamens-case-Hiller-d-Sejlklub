@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Hillerød_Sejlklub.Interfaces
 {
-    internal interface INewsRepository
+    public interface INewsRepository
     {
         public void AddNews(News news);
 

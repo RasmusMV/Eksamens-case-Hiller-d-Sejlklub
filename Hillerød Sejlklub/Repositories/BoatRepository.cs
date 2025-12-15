@@ -13,7 +13,7 @@ namespace Hillerød_Sejlklub.Repositories
 
         private Dictionary<string, Boat> _boat;
 
-        public BoatRepository()
+        private BoatRepository()
         {
             _boat = new Dictionary<string, Boat>();
         }
