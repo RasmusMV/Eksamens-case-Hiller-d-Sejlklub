@@ -11,11 +11,11 @@ namespace Hillerød_Sejlklub.Interfaces
     {
         public Dictionary<int, Booking> BookingList { get; }
 
-        public void AddBooking(Member member, Boat boat, string destination, int startYear, int startMonth, int startDay, int startHour, int startMinute, int endHour, int endMinute);
+        public void AddBooking(Member member, Boat boat, string destination, DateTime start, DateTime finish);
 
         public void DeleteBooking(Booking booking);
 
-        public void UpdateBookingDate(Booking booking, int startYear, int startMonth, int startDay, int startHour, int startMinute, int finishHour, int finishMinute);
+        public void UpdateBookingDate(Booking booking, DateTime start, DateTime finish);
 
         public void UpdateBookingBoat(Booking booking, Boat newBoat);
 

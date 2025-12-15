@@ -18,7 +18,7 @@ Booking booking3 = new Booking(henrik, chopper, "Bjerge", 2025, 12, 7, 5, 0, 10,
 Booking booking4 = new Booking(mathias, chopper, "Hvide sande", 2025, 12, 20, 16, 0, 23, 59);
 */
 
-bookinger.AddBooking(mathias, skipper, "Hvide sande", 2025, 12, 7, 18, 0, 23, 59);
+bookinger.AddBooking(mathias, skipper, "Hvide sande", new DateTime(2025, 12, 7, 18, 0, 0), new DateTime(2025, 12, 7, 23, 59, 0));
 
 /*
 Add the second booking object to the bookingrepository,
@@ -26,9 +26,9 @@ however as this object has an overlapping time interval with booking1 a BookingD
 and the object won't be added to the list
 */
 
-bookinger.AddBooking(henrik, skipper, "Stillinge strand", 2025, 12, 7, 21, 30, 23, 30);
-bookinger.AddBooking(henrik, chopper, "Bjerge", 2025, 12, 7, 5, 0, 10, 30);
-bookinger.AddBooking(mathias, chopper, "Hvide sande", 2025, 12, 20, 16, 0, 23, 59);
+bookinger.AddBooking(henrik, skipper, "Stillinge strand", new DateTime(2025, 12, 7, 21, 30, 0), new DateTime(2025, 12, 7, 23, 30, 0));
+bookinger.AddBooking(henrik, chopper, "Bjerge", new DateTime(2025, 12, 7, 5, 0, 0), new DateTime(2025, 12, 7, 10, 30, 0));
+bookinger.AddBooking(mathias, chopper, "Hvide sande", new DateTime(2025, 12, 20, 16, 0, 0), new DateTime(2025, 12, 20, 23, 59, 0));
 
 Console.WriteLine($"\nWrite out all bookings currently placed in bookingrepository\n");
 
@@ -63,14 +63,14 @@ foreach (var keyValuePair in bookinger.BookingList)
 
 Console.WriteLine($"Updating the date of booking1 \n");
 
-bookinger.UpdateBookingDate(bookinger.BookingList[0], 2025, 12, 20, 16, 0, 23, 59);
+bookinger.UpdateBookingDate(bookinger.BookingList[0], new DateTime(2025, 12, 20, 16, 0, 0), new DateTime(2025, 12, 20, 23, 59, 0));
 
 foreach (var keyValuePair in bookinger.BookingList)
 {
     Console.WriteLine(keyValuePair.Value.ToString());
 }
 
-Console.WriteLine($"Updating the boat in booking1 is using, however that time slot is already occupied by booking4 \n");
+Console.WriteLine($"Updating the boat a booking is using, however that time slot is already occupied by another booking with that boat \n");
 
 bookinger.UpdateBookingBoat(bookinger.BookingList[0], chopper);
 
@@ -79,10 +79,10 @@ foreach (var keyValuePair in bookinger.BookingList)
     Console.WriteLine(keyValuePair.Value.ToString());
 }
 
-Console.WriteLine($"Updating the boat in booking1 but this time changing the date to a non-occupied time \n");
+Console.WriteLine($"Updating the boat in the same booking again, but this time changing the date to a non-occupied time \n");
 
 
-bookinger.UpdateBookingDate(bookinger.BookingList[0], 2025, 12, 20, 10, 0, 14, 30);
+bookinger.UpdateBookingDate(bookinger.BookingList[0], new DateTime(2025, 12, 20, 10, 0, 0), new DateTime(2025, 12, 20, 14, 30, 0));
 
 bookinger.UpdateBookingBoat(bookinger.BookingList[0], chopper);
 
@@ -108,7 +108,7 @@ foreach (var member in bookinger.MemberBookings())
 //member
 
 
-MemberRepository memberRepository = new MemberRepository();
+UserRepository memberRepository = new UserRepository();
 
 List<Member> members = memberRepository.GetAll();
 
