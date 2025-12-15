@@ -2,7 +2,7 @@
 using Hillerød_Sejlklub.Exceptions;
 using Hillerød_Sejlklub.Repositories;
 BookingRepository bookinger = BookingRepository.GetInstance();
-MemberRepository members = MemberRepository.GetInstance();
+UserRepository members = UserRepository.GetInstance();
 
 //Initialize boats
 Boat skipper = new Boat("Skipper", "5341", "Clipper", "Sagitarius", 1534, 300, 1000, 4000, "None", 0, "None");
@@ -109,7 +109,7 @@ foreach (var member in bookinger.MemberBookings())
 //member
 
 
-UserRepository memberRepository = new UserRepository();
+UserRepository memberRepository = UserRepository.GetInstance();
 
 List<Member> membersList = memberRepository.GetAll();
 
