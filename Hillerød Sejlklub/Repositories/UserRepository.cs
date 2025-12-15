@@ -10,11 +10,11 @@ namespace Hillerød_Sejlklub.Repositories
     public class UserRepository : IUserRepository
     {
         #region Static fields
-        private static MemberRepository _instance = null;
+        private static UserRepository _instance = null;
         #endregion
         private readonly Dictionary<string, Member> _members;
 
-        public UserRepository()
+        private UserRepository()
         {
             _members = new Dictionary<string, Member>
         {
@@ -25,11 +25,11 @@ namespace Hillerød_Sejlklub.Repositories
       
         }          
 
-     public static MemberRepository GetInstance()
+     public static UserRepository GetInstance()
         {
             if (_instance == null)
             {
-                _instance = new MemberRepository();
+                _instance = new UserRepository();
             }
             return _instance;
         }
@@ -59,7 +59,9 @@ namespace Hillerød_Sejlklub.Repositories
 
         {
             if (_members.TryGetValue(name, out var member))
+            {
                 return member;
+            }
             return null;
         }
 
@@ -68,9 +70,5 @@ namespace Hillerød_Sejlklub.Repositories
             _members[key].Name = name;
         }
 
-        List<Member> IUserRepository.GetAll()
-        {
-            return _members.Values.ToList();
-        }
     }
 }
