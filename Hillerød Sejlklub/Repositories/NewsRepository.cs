@@ -24,5 +24,20 @@ namespace Hillerød_Sejlklub.Repositories
         {
             _news.Remove(id);
         }
+        public List<News> GetNewsByName(string name)
+        {
+            List<News> news = new List<News>();
+
+            foreach (var newss in _news)
+            {
+                if (newss.Value.Name != null && newss.Value.Name.Contains(name, StringComparison.InvariantCultureIgnoreCase) == true)
+                {
+                    news.Add(newss.Value);
+                }
+            }
+
+            return news;
+
+        }
     }
 }
