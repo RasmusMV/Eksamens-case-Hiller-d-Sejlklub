@@ -15,7 +15,10 @@ namespace Hillerød_Sejlklub.Repositories
 
         private BoatRepository()
         {
-            _boat = new Dictionary<string, Boat>();
+            _boat = new Dictionary<string, Boat>()
+            {
+                {"1105", new Boat("Plopper", "1105", "Clipper", "Sagitarius", 1534, 300, 1000, 4000, "None", 0, "None") }
+            };
         }
 
         public static BoatRepository GetInstanceFromBoat()
@@ -45,7 +48,20 @@ namespace Hillerød_Sejlklub.Repositories
         {
             return _boat.Values.ToList();
         }
-        public List<Boat> GetBoatByName(string name)
+
+        public Boat GetBoatByName(string name)
+        {
+            foreach (var boat in _boat)
+            {
+                if(name == boat.Value.Name)
+                {
+                    return boat.Value;
+                }
+            }
+            return null;
+        }
+
+        public List<Boat> SearchBoatByName(string name)
         {
             List<Boat> boats = new List<Boat>();
 

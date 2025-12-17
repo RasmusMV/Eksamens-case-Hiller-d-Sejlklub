@@ -216,7 +216,7 @@ foreach (var boat in boatRepository.GetAll())
 //boatRepository.RemoveBoat("ABC123");
 
 //Get by name
-foreach(Boat boat in boatRepository.GetBoatByName("Fenja"))
+foreach(Boat boat in boatRepository.SearchBoatByName("Fenja"))
 {
     Console.WriteLine(boat.ToString());
 }
