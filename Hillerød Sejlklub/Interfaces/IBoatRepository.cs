@@ -11,7 +11,8 @@ namespace Hillerød_Sejlklub.Interfaces
         public void AddBoat(Boat boat);
         public void RemoveBoat(string sailNumber);
         public void UpdateBoatName(Boat boat, string newName);
-        public List<Boat> GetBoatByName(string name);
+        public Boat GetBoatByName(string boat);
+        public List<Boat> SearchBoatByName(string name);
         public List<Boat> GetAll();
     }
 }
