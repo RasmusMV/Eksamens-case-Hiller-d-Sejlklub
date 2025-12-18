@@ -118,6 +118,11 @@ namespace Hillerød_Sejlklub.Repositories
             }
         }
 
+        public void UpdateBookingDestination(Booking booking, string newDestination)
+        {
+            booking.Destination = newDestination;
+        }
+
         //Method returning a list of all the currently active bookings 
         public List<Booking> CurrentlySailing()
         {

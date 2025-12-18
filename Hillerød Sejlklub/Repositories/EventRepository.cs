@@ -18,7 +18,7 @@ namespace Hillerød_Sejlklub.Repositories
             _events = new Dictionary<int, Event>();
         }
 
-        public Dictionary<int, Event> EventList
+        public Dictionary<int, Event> EventDictionary
         {
             get { return _events; }
         }
