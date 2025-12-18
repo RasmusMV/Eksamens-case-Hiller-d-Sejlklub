@@ -186,12 +186,6 @@ foreach (var evt in events.GetByName("sommer"))
 }
 
 
-
-
-
-
-
-
 BoatRepository boatRepository = BoatRepository.GetInstanceFromBoat();
 
 //Tilføj ny boat
