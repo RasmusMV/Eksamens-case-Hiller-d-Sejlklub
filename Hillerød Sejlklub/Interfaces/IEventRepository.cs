@@ -8,6 +8,8 @@ namespace Hillerød_Sejlklub.Interfaces
 {
     public interface IEventRepository
     {
+        public Dictionary<int, Event> EventDictionary { get; }
+
         public void AddEvent(Event evt);
 
         public void DeleteEvent(Event evt);

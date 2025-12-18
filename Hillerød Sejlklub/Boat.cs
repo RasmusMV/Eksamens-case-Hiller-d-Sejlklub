@@ -10,7 +10,6 @@ namespace Hillerød_Sejlklub
 {
     public class Boat : Engine
     {
-        private Dictionary<string, Boat> _boat;
 
         public Boat(string name, string sailNumber, string boatType, string model, int builtYear, double width, double height, double length, string motorType, int hp, string brand) : base(motorType, hp, brand)
         {
