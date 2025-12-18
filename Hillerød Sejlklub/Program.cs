@@ -215,3 +215,21 @@ foreach(Boat boat in boatRepository.SearchBoatByName("Fenja"))
     Console.WriteLine(boat.ToString());
 }
 
+
+NewsRepository newsRepository = NewsRepository.GetInstance();
+
+//Tilføj ny news
+newsRepository.AddNews(new News("Der er for mange læger i danmark", "Der er for mange læger i danmark"));
+
+foreach (News news in newsRepository.GetNewsByName("Der er for mange læger i danmark"))
+{
+    Console.WriteLine(news.ToString());
+}
+
+//delete news
+newsRepository.RemoveNews(1);
+
+foreach (News news in newsRepository.GetNewsByName("Der er for mange læger i danmark"))
+{
+    Console.WriteLine(news.ToString());
+}
